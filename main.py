@@ -1,10 +1,12 @@
 """Encryption and Decryption"""
+import nltk
 from nltk.corpus import words
 try:
     word_list = words.words()
 except KeyError:
-    import nltk
     nltk.download('words')
+    from nltk.corpus import words  # pylint: disable=reimported
+    word_list = words.words()
 alphabets = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']  # noqa  #pylint: disable=line-too-long
 LENGTH = len(alphabets)
 
@@ -61,7 +63,7 @@ def ceaser(func: str, scale: int, text: str):
             decrypted_answer = str(decrypted_answer).split(' ')
             for word in decrypted_answer:
                 if word in word_list:
-                    most_likely_answer += word+' ' if len(most_likely_answer) > len(decrypted_answer) else None
+                    most_likely_answer += word+' ' # noqa  # pylint: disable=line-too-long
             if len(most_likely_answer) > 0:
                 break
         list_with_answers.append(f'Most Likely: {most_likely_answer}')
