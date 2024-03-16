@@ -61,7 +61,7 @@ def ceaser(func: str, scale: int, text: str):
             decrypted_answer = str(decrypted_answer).split(' ')
             for word in decrypted_answer:
                 if word in word_list:
-                    most_likely_answer += word+' '
+                    most_likely_answer += word+' ' if len(most_likely_answer) > len(decrypted_answer) else None
             if len(most_likely_answer) > 0:
                 break
         list_with_answers.append(f'Most Likely: {most_likely_answer}')
